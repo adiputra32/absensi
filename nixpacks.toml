@@ -1,0 +1,12 @@
+[phases.setup]
+nixPkgs = ["php80", "composer", "nodejs"]
+
+[phases.build]
+cmds = [
+  "composer install --no-dev --optimize-autoloader",
+  "php artisan config:cache || true",
+  "php artisan route:cache || true"
+]
+
+[start]
+cmd = "php -S 0.0.0.0:$PORT -t public"
